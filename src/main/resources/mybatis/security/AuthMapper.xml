@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.strato.demosite.security.mapper.AuthMapper">
+    <select id="findByMember" parameterType="String" resultType="kr.co.strato.demosite.security.model.entity.Member">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+
+    <insert id="joinByMember" parameterType="kr.co.strato.demosite.security.model.entity.Member">
+        INSERT INTO user(username, password, regdate, roletype) VALUES (#{username}, #{password}, #{regDate}, #{roleType})
+    </insert>
+
+    <select id="findByRefresh" parameterType="String" resultType="kr.co.strato.demosite.security.model.entity.RefreshToken">
+        SELECT * FROM refresh WHERE username = #{username}
+    </select>
+
+    <insert id="saveByRefresh" parameterType="kr.co.strato.demosite.security.model.entity.RefreshToken">
+        INSERT INTO refresh(username, token) VALUES (#{username}, #{refreshToken})
+    </insert>
+
+    <update id="updateByRefresh" parameterType="kr.co.strato.demosite.security.model.entity.RefreshToken" >
+        UPDATE refresh SET username = #{username}, token = #{refreshToken} WHERE username = #{username}
+    </update>
+</mapper>
